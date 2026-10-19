@@ -22,3 +22,48 @@ export { darken, parseRgb, rgbString } from "./utils/colours";
 export { ROLES_BY_ID } from "./data/roles";
 export { JINXES } from "./data/jinxes";
 export { FIRST_NIGHT_ORDER, OTHER_NIGHT_ORDER } from "./data/nightsheet";
+
+// Translation exports
+export {
+  TranslationProvider,
+  useTranslation,
+  useTranslatedText,
+  useLanguage,
+  useTranslatedJinxes,
+  useTranslatedRole,
+  useTranslatedEdition,
+  useTranslatedReminder,
+} from "./translations/context";
+
+export type {
+  TranslationContextType,
+  LanguageCode,
+  EditionTranslation,
+  RoleTranslation,
+  JinxTranslation,
+  ReminderTranslation,
+  TranslationFile,
+} from "./translations/types";
+
+export {
+  loadTranslations,
+  getAvailableLanguages,
+  validateTranslations,
+  getEnglishFallback,
+} from "./translations/loader";
+
+export {
+  getJinxKey,
+  getTranslation,
+  getRoleName,
+  getRoleAbility,
+  getJinxReason,
+  getReminderText,
+  getEditionName,
+  getEditionDescription,
+  getTranslatedJinxes,
+  getTranslatedJinxReason,
+  isLanguageSupported,
+  getSupportedLanguages,
+} from "./translations/utils";
+

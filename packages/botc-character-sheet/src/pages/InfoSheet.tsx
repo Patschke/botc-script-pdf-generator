@@ -3,6 +3,7 @@ import { PlayerCount } from "../components/PlayerCount";
 import { NightOrderEntry, ResolvedCharacter, ScriptOptions } from "../types";
 import { FabledOrLoric } from "../utils/fabledOrLoric";
 import { getImageSrc } from "../utils/nightOrder";
+import { useTranslation } from "../translations/context";
 import "./InfoSheet.css";
 
 type InfoSheetProps = {
@@ -29,7 +30,17 @@ export const InfoSheet = ({
   travellers,
   options,
 }: InfoSheetProps) => {
+  const { t } = useTranslation();
   const { displayNightOrder, displayPlayerCounts, iconUrlTemplate } = options;
+  
+  // Get translated text
+  const firstNightText = t('editions', 'firstNight', 'name') || 'First Night';
+  const otherNightsText = t('editions', 'otherNights', 'name') || 'Other Nights';
+  const fabledLoricText = t('editions', 'fabledLoric', 'name') || 'Fabled & Loric';
+  const jinxesText = t('editions', 'jinxes', 'name') || 'Jinxes';
+  const travellersText = t('editions', 'travellers', 'name') || 'Recommended Travellers';
+  const baseCountsText = t('editions', 'baseCounts', 'name') || 'Base Character Counts';
+  
   return (
     <>
       <BottomTrimSheet options={options}>
@@ -39,7 +50,7 @@ export const InfoSheet = ({
         <div className="info-sheet-content">
           {displayNightOrder && !!firstNightOrder?.length && (
             <>
-              <h4 className="info-sheet-section-title">First Night</h4>
+              <h4 className="info-sheet-section-title">{firstNightText}</h4>
               <div class="info-sheet-section">
                 <div className="icon-row">
                   {firstNightOrder.map((item) => (
@@ -54,7 +65,7 @@ export const InfoSheet = ({
           )}
           {displayNightOrder && !!otherNightOrder?.length && (
             <>
-              <h4 className="info-sheet-section-title">Other Nights</h4>
+              <h4 className="info-sheet-section-title">{otherNightsText}</h4>
               <div class="info-sheet-section">
                 <div className="icon-row">
                   {otherNightOrder.map((item) => (
@@ -70,7 +81,7 @@ export const InfoSheet = ({
 
           {!!fabledOrLoric?.length && (
             <>
-              <h4 className="info-sheet-section-title">Fabled & Loric</h4>
+              <h4 className="info-sheet-section-title">{fabledLoricText}</h4>
               <div class="info-sheet-section">
                 {fabledOrLoric?.map((entry) => (
                   <div className="info-fabled-loric-entry">
@@ -96,7 +107,7 @@ export const InfoSheet = ({
 
           {!!jinxes?.length && (
             <>
-              <h4 className="info-sheet-section-title">Jinxes</h4>
+              <h4 className="info-sheet-section-title">{jinxesText}</h4>
               <div class="info-sheet-section">
                 {jinxes?.map((jinx) => (
                   <div className="info-jinx-entry">
@@ -124,9 +135,7 @@ export const InfoSheet = ({
 
           {!!travellers?.length && (
             <>
-              <h4 className="info-sheet-section-title">
-                Recommended Travellers
-              </h4>
+              <h4 className="info-sheet-section-title">{travellersText}</h4>
               <div class="info-sheet-section">
                 {travellers?.map((entry) => (
                   <div className="info-fabled-loric-entry">
@@ -147,9 +156,7 @@ export const InfoSheet = ({
 
           {displayPlayerCounts && (
             <>
-              <h4 className="info-sheet-section-title">
-                Base Character Counts
-              </h4>
+              <h4 className="info-sheet-section-title">{baseCountsText}</h4>
               <div className="info-sheet-section">
                 <PlayerCount background={false} />
               </div>

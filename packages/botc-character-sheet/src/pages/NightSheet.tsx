@@ -3,6 +3,7 @@ import { getImageSrc } from "../utils/nightOrder";
 import "./NightSheet.css";
 import { teamColours } from "../utils/colours";
 import { BottomTrimSheet } from "../components/BottomTrimSheet";
+import { useTranslation } from "../translations/context";
 
 export type NightSheetProps = {
   title: string;
@@ -17,12 +18,19 @@ export const NightSheet = ({
   otherNightOrder,
   options,
 }: NightSheetProps) => {
+  const { t } = useTranslation();
+  
+  // Get translated section titles
+  // Note: These edition translations need to be added to the German translations file
+  const firstNightText = t('editions', 'firstNight', 'name') || 'First Night';
+  const otherNightsText = t('editions', 'otherNights', 'name') || 'Other Nights';
+  
   return (
     <>
       {firstNightOrder && (
         <BottomTrimSheet options={options}>
           <div className="night-sheet-heading">
-            <h3 className="night-title">First Night</h3>
+            <h3 className="night-title">{firstNightText}</h3>
             <h3 className="script-title">{title}</h3>
           </div>
           <div className="night-sheet-order">
@@ -39,7 +47,7 @@ export const NightSheet = ({
       {otherNightOrder && (
         <BottomTrimSheet options={options}>
           <div className="night-sheet-heading">
-            <h3 className="night-title">Other Nights</h3>
+            <h3 className="night-title">{otherNightsText}</h3>
             <h3 className="script-title">{title}</h3>
           </div>
           <div className="night-sheet-order">
