@@ -483,7 +483,7 @@ function EditMode() {
         onDownloadCharacterSheet={handleDownloadCharacterSheet}
         onDownloadInfoSheet={handleDownloadInfoSheet}
       />
-    <TranslationDebug />
+    <TranslationDebug onLanguageChange={(lang) => updateOption("language", lang)} />
   </TranslationProvider>
   );
 }

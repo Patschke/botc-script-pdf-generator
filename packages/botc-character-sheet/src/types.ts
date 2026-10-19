@@ -1,4 +1,5 @@
 import type { ScriptCharacter, ScriptMetadata } from "botc-script-checker";
+import type { LanguageCode } from "./translations/types";
 
 // Character types needed by the component
 export type CharacterTeam =
@@ -80,7 +81,7 @@ export interface ScriptOptions {
   dimensions: PageDimensions;
   teensy: boolean;
   // Language support
-  language?: string;
+  language?: LanguageCode;
 }
 
 export interface ParsedScript {

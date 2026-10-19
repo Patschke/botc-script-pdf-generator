@@ -1,7 +1,8 @@
 import { useEffect, useState } from "preact/hooks";
 import { useTranslation } from "botc-character-sheet";
+import type { LanguageCode } from "botc-character-sheet";
 
-export function TranslationDebug() {
+export function TranslationDebug({ onLanguageChange }: { onLanguageChange?: (lang: LanguageCode) => void }) {
   const { language, setLanguage, t } = useTranslation();
   const [showDebug, setShowDebug] = useState(false);
   const [testResult, setTestResult] = useState<string | null>(null);
@@ -23,6 +24,13 @@ export function TranslationDebug() {
   const testTranslation = () => {
     const result = t("roles", "alchemist", "name");
     setTestResult(result || "No translation found");
+  };
+
+  const handleLanguageChange = (lang: LanguageCode) => {
+    setLanguage(lang);
+    if (onLanguageChange) {
+      onLanguageChange(lang);
+    }
   };
 
   if (!showDebug) return null;
@@ -48,7 +56,7 @@ export function TranslationDebug() {
       </p>
       <div style={{ margin: "10px 0" }}>
         <button
-          onClick={() => setLanguage("en")}
+          onClick={() => handleLanguageChange("en")}
           style={{
             marginRight: "5px",
             padding: "5px 10px",
@@ -58,7 +66,7 @@ export function TranslationDebug() {
           English
         </button>
         <button
-          onClick={() => setLanguage("de")}
+          onClick={() => handleLanguageChange("de")}
           style={{
             padding: "5px 10px",
             cursor: "pointer",
