@@ -28,8 +28,8 @@ export const NightSheet = ({
   // Get translated non-character reminders
   const getNonCharacterReminder = (entry: NightMarker, night: "first" | "other") => {
     const reminderKey = night === "first" ? "first" : "other";
-    const reminderText = t('reminders', entry, reminderKey);
-    const name = t('reminders', entry, 'name');
+    const reminderText = t('roles', entry, reminderKey);
+    const name = t('roles', entry, 'name');
     return {
       reminderText: reminderText || (night === "first" ? NON_CHARACTER_REMINDERS_DEFAULT[entry].first : (NON_CHARACTER_REMINDERS_DEFAULT[entry].other ?? "")),
       name: name || NON_CHARACTER_REMINDERS_DEFAULT[entry].name,
