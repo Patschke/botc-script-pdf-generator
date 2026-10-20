@@ -475,7 +475,7 @@ export const germanTranslations: TranslationFile = {
       "other": "Warte ein paar Sekunden. Dann wecke alle Spieler."
     },
     "demoninfo": {
-      "first": "Falls 7 oder mehr Spieler mitspielen, wecke den Dämon:\\n\\tZeige das *DIES SIND DEINE SCHERGEN* Plättchen. Zeige auf alle Schergen.\\n\\tZeige das *DIESE CHARAKTERE SIND NICHT IM SPIEL* Plättchen. Zeige 3 nicht im Spiel\\nbefindliche gute Charakterplättchen.",
+      "first": "Falls 7 oder mehr Spieler mitspielen, wecke den Dämon: Zeige das *DIES SIND DEINE SCHERGEN* Plättchen. Zeige auf alle Schergen. Zeige das *DIESE CHARAKTERE SIND NICHT IM SPIEL* Plättchen. Zeige 3 nicht im Spiel befindliche gute Charakterplättchen.",
       "name": "Dämon-Info"
     },
     "deusexfiasco": {
@@ -507,10 +507,10 @@ export const germanTranslations: TranslationFile = {
     },
     "dreamer": {
       "ability": "Wähle jede Nacht 1 Spieler (nicht dich selbst oder Reisende): Du erfährst 1 guten & 1 bösen Charakter, 1 davon ist korrekt.",
-      "first": "Der Träumer wählt einen Spieler. Zeige 1 gutes & 1 böses Charakterplättchen, wovon 1 der\\n\\nCharakter des gewählten Spielers ist.",
+      "first": "Der Träumer wählt einen Spieler. Zeige 1 gutes & 1 böses Charakterplättchen, wovon 1 der Charakter des gewählten Spielers ist.",
       "flavor": "Ich erinnere mich an den Uhrmacher. Der Himmel war rot und es regnete fraktale Dreiecke. Es roch nach Veilchen und es blubberte. Eine Frau mit leuchtenden Augen und einem struppigen Bart zischte den Himmel an. Dann bin ich aufgewacht.",
       "name": "Träumer",
-      "other": "Der Träumer wählt einen Spieler. Zeige 1 gutes & 1 böses Charakterplättchen, wovon 1 der\\n\\nCharakter des gewählten Spielers ist."
+      "other": "Der Träumer wählt einen Spieler. Zeige 1 gutes & 1 böses Charakterplättchen, wovon 1 der Charakter des gewählten Spielers ist."
     },
     "drunk": {
       "ability": "Du weißt nicht, dass du der Trunkenbold bist. Du denkst, dass du ein Bürger-Charakter bist, aber das stimmt nicht.",
@@ -741,7 +741,7 @@ export const germanTranslations: TranslationFile = {
       "ability": "Wähle jede Nacht* 1 Spieler: Er stirbt. Falls du dich damit selbst tötest, wird ein Scherge zum Imp.",
       "flavor": "Wir müssen unseren Verstand scharf und unsere Schwerter noch schärfer halten. Das Böse wandelt unter uns und wird nicht ruhen, bis es uns gute, einfache Leute zerstört und unsere feine Stadt in den Ruin getrieben hat. Vertraue niemandem. Aber wenn du doch jemandem vertrauen musst, dann vertraue mir.",
       "name": "Imp",
-      "other": "Der Imp wählt einen Spieler. :reminder: Falls der Imp sich selbst wählt:\\n\\tErsetze das Plättchen eines lebendigen Schergen durch ein zusätzliches Impplättchen.\\n\\tLasse den bisherigen Imp einschlafen. Wecke den neuen Imp.\\n\\tZeige das *DU BIST* Plättchen, dann zeige das Impplättchen."
+      "other": "Der Imp wählt einen Spieler. :reminder: Falls der Imp sich selbst wählt: Ersetze das Plättchen eines lebendigen Schergen durch ein zusätzliches Impplättchen. Lasse den bisherigen Imp einschlafen. Wecke den neuen Imp. Zeige das *DU BIST* Plättchen, dann zeige das Impplättchen."
     },
     "innkeeper": {
       "ability": "Wähle jede Nacht* 2 Spieler: Sie können heute Nacht nicht sterben, aber einer von ihnen ist bis zur Abenddämmerung betrunken.",
@@ -891,7 +891,7 @@ export const germanTranslations: TranslationFile = {
       "other": "Falls ein guter Spieler das geheime Wort gesagt hat, wecke diesen Spieler. Zeige ihm das Infoplättchen *DU BIST* & Daumen nach unten. :reminder: :reminder:"
     },
     "minioninfo": {
-      "first": "Falls 7 oder mehr Spieler mitspielen, wecke alle Schergen:\\nZeige das *DIES IST DER DÄMON* Plättchen. Zeige auf den Dämon.",
+      "first": "Falls 7 oder mehr Spieler mitspielen, wecke alle Schergen: Zeige das *DIES IST DER DÄMON* Plättchen. Zeige auf den Dämon.",
       "name": "Schergen-Info"
     },
     "minstrel": {
@@ -1210,7 +1210,7 @@ export const germanTranslations: TranslationFile = {
     },
     "tinker": {
       "ability": "Du könntest jederzeit sterben.",
-      "flavor": "Ich glaube, ich habe das Problem identifiziert. Dieses Katapult wird mit\\neiner winzigen Anpassung mindestens doppelt so weit schießen...",
+      "flavor": "Ich glaube, ich habe das Problem identifiziert. Dieses Katapult wird mit einer winzigen Anpassung mindestens doppelt so weit schießen...",
       "name": "Bastler",
       "other": "Der Bastler stirbt möglicherweise. :reminder:"
     },
