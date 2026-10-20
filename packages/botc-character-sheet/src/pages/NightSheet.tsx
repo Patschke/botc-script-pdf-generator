@@ -1,4 +1,4 @@
-import { NightMarker, NightOrderEntry, ScriptOptions } from "../types";
+import { CharacterTeam, NightMarker, NightOrderEntry, ScriptOptions } from "../types";
 import { getImageSrc } from "../utils/nightOrder";
 import "./NightSheet.css";
 import { teamColours } from "../utils/colours";
@@ -25,6 +25,65 @@ export const NightSheet = ({
   const firstNightText = t('editions', 'firstNight', 'name') || 'First Night';
   const otherNightsText = t('editions', 'otherNights', 'name') || 'Other Nights';
   
+  // Get translated non-character reminders
+  const getNonCharacterReminder = (entry: NightMarker, night: "first" | "other") => {
+    const reminderKey = night === "first" ? "first" : "other";
+    const reminderText = t('reminders', entry, reminderKey);
+    const name = t('reminders', entry, 'name');
+    return {
+      reminderText: reminderText || (night === "first" ? NON_CHARACTER_REMINDERS_DEFAULT[entry].first : (NON_CHARACTER_REMINDERS_DEFAULT[entry].other ?? "")),
+      name: name || NON_CHARACTER_REMINDERS_DEFAULT[entry].name,
+    };
+  };
+
+  const getReminderText = (entry: NightOrderEntry, night: "first" | "other") => {
+    if (typeof entry === "object") {
+      const reminderKey = night === "first" ? "first" : "other";
+      const reminderText = t('roles', entry.id, reminderKey) || (night === "first" ? entry.firstNightReminder : entry.otherNightReminder);
+      const name = t('roles', entry.id, 'name') || entry.name;
+      return { reminderText, name };
+    } else {
+      const reminder = getNonCharacterReminder(entry, night);
+      return reminder;
+    }
+  };
+
+  const NightSheetEntry = (props: NightSheetEntryProps) => {
+    const src = getImageSrc(props.entry, props.iconUrlTemplate);
+    const { reminderText, name } = getReminderText(props.entry, props.night);
+    const colour =
+      typeof props.entry === "string" ? "#222" : teamColours[props.entry.team];
+    if (!reminderText) {
+      console.warn("No reminder text found for:", props.entry);
+      return <></>;
+    }
+
+    const replaceReminders = (str: string) =>
+      str.split(":reminder:").map((u, i) => (i % 2 === 0 ? u : <ReminderIcon />));
+
+    const renderText = (text: string) => {
+      const withBold = text
+        .split("*")
+        .map((t, i) => (i % 2 === 0 ? t : <strong>{t}</strong>))
+        .map((t) => (typeof t === "string" ? replaceReminders(t) : t));
+      return <>{withBold}</>;
+    };
+
+    const isMarker = typeof props.entry === "string";
+
+    return (
+      <div className="night-sheet-entry">
+        <img src={src} className={isMarker ? "marker-icon" : undefined}></img>
+        <div className="night-sheet-entry-text">
+          <p className="reminder-name" style={{ color: colour }}>
+            {name}
+          </p>
+          <p className="reminder-text">{renderText(reminderText)}</p>
+        </div>
+      </div>
+    );
+  };
+  
   return (
     <>
       {firstNightOrder && (
@@ -39,6 +98,7 @@ export const NightSheet = ({
                 entry={reminder}
                 night="first"
                 iconUrlTemplate={options.iconUrlTemplate}
+                getReminderText={getReminderText}
               />
             ))}
           </div>
@@ -56,6 +116,7 @@ export const NightSheet = ({
                 entry={reminder}
                 night="other"
                 iconUrlTemplate={options.iconUrlTemplate}
+                getReminderText={getReminderText}
               />
             ))}
           </div>
@@ -65,21 +126,48 @@ export const NightSheet = ({
   );
 };
 
-type NightSheetEntryProps = {
-  entry: NightOrderEntry;
-  night: "first" | "other";
-  iconUrlTemplate?: string;
-};
-
 const ReminderIcon = () => (
   <img className="reminder-icon" src="/images/reminder.png"></img>
 );
 
+const NON_CHARACTER_REMINDERS_DEFAULT: Record<
+  NightMarker,
+  { first: string; name: string; other?: string }
+> = {
+  dusk: {
+    first: "Start the Night Phase.",
+    name: "Dusk",
+    other: "Start the Night Phase.",
+  },
+  dawn: {
+    first: "Wait for a few seconds. End the Night Phase.",
+    name: "Dawn",
+    other: "Wait for a few seconds. End the Night Phase.",
+  },
+  demoninfo: {
+    first:
+      "If there are 7 or more players, wake the Demon: Show the *THESE ARE YOUR MINIONS* token. Point to all Minions. Show the *THESE CHARACTERS ARE NOT IN PLAY* token. Show 3 not-in-play good character tokens.",
+    name: "Demon Info",
+  },
+  minioninfo: {
+    first:
+      "If there are 7 or more players, wake all Minions: Show the *THIS IS THE DEMON* token. Point to the Demon. Show the *THESE ARE YOUR MINIONS* token. Point to the other Minions.",
+    name: "Minion Info",
+  },
+};
+
+type NightSheetEntryProps = {
+  entry: NightOrderEntry;
+  night: "first" | "other";
+  iconUrlTemplate?: string;
+  getReminderText: (entry: NightOrderEntry, night: "first" | "other") => { reminderText: string | undefined; name: string };
+};
+
 export const NightSheetEntry = (props: NightSheetEntryProps) => {
   const src = getImageSrc(props.entry, props.iconUrlTemplate);
-  const { reminderText, name } = getReminderText(props.entry, props.night);
+  const { reminderText, name } = props.getReminderText(props.entry, props.night);
   const colour =
-    typeof props.entry === "string" ? "#222" : teamColours[props.entry.team];
+    typeof props.entry === "string" ? "#222" : teamColours[props.entry.team as CharacterTeam];
   if (!reminderText) {
     console.warn("No reminder text found for:", props.entry);
     return <></>;
@@ -109,45 +197,4 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
       </div>
     </div>
   );
-};
-
-const getReminderText = (entry: NightOrderEntry, night: "first" | "other") => {
-  if (typeof entry === "object") {
-    const reminderText =
-      night === "first" ? entry.firstNightReminder : entry.otherNightReminder;
-    const name = entry.name;
-    return { reminderText, name };
-  } else {
-    const reminder = NON_CHARACTER_REMINDERS[entry];
-    const reminderText =
-      night === "first" ? reminder.first : (reminder.other ?? "");
-    const name = reminder.name;
-    return { reminderText, name };
-  }
-};
-
-const NON_CHARACTER_REMINDERS: Record<
-  NightMarker,
-  { first: string; name: string; other?: string }
-> = {
-  dusk: {
-    first: "Start the Night Phase.",
-    name: "Dusk",
-    other: "Start the Night Phase.",
-  },
-  dawn: {
-    first: "Wait for a few seconds. End the Night Phase.",
-    name: "Dawn",
-    other: "Wait for a few seconds. End the Night Phase.",
-  },
-  demoninfo: {
-    first:
-      "If there are 7 or more players, wake the Demon: Show the *THESE ARE YOUR MINIONS* token. Point to all Minions. Show the *THESE CHARACTERS ARE NOT IN PLAY* token. Show 3 not-in-play good character tokens.",
-    name: "Demon Info",
-  },
-  minioninfo: {
-    first:
-      "If there are 7 or more players, wake all Minions: Show the *THIS IS THE DEMON* token. Point to the Demon. Show the *THESE ARE YOUR MINIONS* token. Point to the other Minions.",
-    name: "Minion Info",
-  },
 };
