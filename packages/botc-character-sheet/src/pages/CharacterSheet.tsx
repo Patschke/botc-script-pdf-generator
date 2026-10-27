@@ -11,6 +11,7 @@ import { FabledOrLoric } from "../utils/fabledOrLoric";
 import { JinxesAndSpecial } from "../components/JinxesAndSpecial";
 import { CharacterSection } from "./CharacterSection";
 import { PrintablePage } from "../components/PrintablePage";
+import { useTranslation } from "../translations/context";
 
 interface CharacterSheetProps {
   title: string;
@@ -31,6 +32,7 @@ export function CharacterSheet({
   bootleggerRules = [],
   options,
 }: CharacterSheetProps) {
+  const { t } = useTranslation();
   const {
     color,
     logo,
@@ -48,25 +50,25 @@ export function CharacterSheet({
   const sections = [
     {
       key: "townsfolk",
-      title: "Townsfolk",
+      title: t('ui', 'townsfolk') || 'Townsfolk',
       chars: characters.townsfolk,
       color: teamColours["townsfolk"],
     },
     {
       key: "outsider",
-      title: "Outsiders",
+      title: t('ui', 'outsiders') || 'Outsiders',
       chars: characters.outsider,
       color: teamColours["outsider"],
     },
     {
       key: "minion",
-      title: "Minions",
+      title: t('ui', 'minions') || 'Minions',
       chars: characters.minion,
       color: teamColours["minion"],
     },
     {
       key: "demon",
-      title: "Demons",
+      title: t('ui', 'demons') || 'Demons',
       chars: characters.demon,
       color: teamColours["demon"],
     },
@@ -159,7 +161,7 @@ export function CharacterSheet({
           </div>
 
           <div className="sheet-footer">
-            <span className="asterisk">*</span>Not the first night
+            <span className="asterisk">*</span>{t('ui', 'not_first_night') || 'Not the first night'}
           </div>
           <img
             className="ccc-logo"

@@ -21,9 +21,8 @@ export const NightSheet = ({
   const { t } = useTranslation();
   
   // Get translated section titles
-  // Note: These edition translations need to be added to the German translations file
-  const firstNightText = t('editions', 'firstNight', 'name') || 'First Night';
-  const otherNightsText = t('editions', 'otherNights', 'name') || 'Other Nights';
+  const firstNightText = t('ui', 'first_night') || 'First Night';
+  const otherNightsText = t('ui', 'other_nights') || 'Other Nights';
   
   // Get translated non-character reminders
   const getNonCharacterReminder = (entry: NightMarker, night: "first" | "other") => {

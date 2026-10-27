@@ -34,12 +34,12 @@ export const InfoSheet = ({
   const { displayNightOrder, displayPlayerCounts, iconUrlTemplate } = options;
   
   // Get translated text
-  const firstNightText = t('editions', 'firstNight', 'name') || 'First Night';
-  const otherNightsText = t('editions', 'otherNights', 'name') || 'Other Nights';
-  const fabledLoricText = t('editions', 'fabledLoric', 'name') || 'Fabled & Loric';
-  const jinxesText = t('editions', 'jinxes', 'name') || 'Jinxes';
-  const travellersText = t('editions', 'travellers', 'name') || 'Recommended Travellers';
-  const baseCountsText = t('editions', 'baseCounts', 'name') || 'Base Character Counts';
+  const firstNightText = t('ui', 'firstNight') || 'First Night';
+  const otherNightsText = t('ui', 'otherNights') || 'Other Nights';
+  const fabledLoricText = t('ui', 'fabledLoric') || 'Fabled & Loric';
+  const jinxesText = t('ui', 'jinxes') || 'Jinxes';
+  const travellersText = t('ui', 'recommendedTravellers') || 'Recommended Travellers';
+  const baseCountsText = t('ui', 'baseCounts') || 'Base Character Counts';
   
   return (
     <>

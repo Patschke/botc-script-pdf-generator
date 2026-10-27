@@ -1338,5 +1338,22 @@
             "name": "Zombuul",
             "other": "Falls heute niemand gestorben ist, wählt der Zombuul einen Spieler. :reminder:"
         }
+    },
+    "ui": {
+        "townsfolk": "Bürger",
+        "outsiders": "Außenseiter",
+        "minions": "Schergen",
+        "demons": "Dämonen",
+        "travellers": "Reisende",
+        "loric":"Loric",
+        "fabled":"Legenden",
+        "not_first_night": "Nicht in der ersten Nacht",
+        "first_night": "Erste Nacht",
+        "other_nights": "Andere Nächte",
+        "players": "Spieler",
+        "fabled_and_loric": "Legenden & Loric",
+        "jinxes": "Verhexungen",
+        "recommendedTravellers": "Empfohlene Reisende",
+        "baseCounts": "Standardmäßige Charakterzahlen"
     }
 }

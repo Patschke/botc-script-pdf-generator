@@ -22,6 +22,7 @@ export type TranslationFile = {
   jinxes: Record<string, JinxTranslation>;
   reminders: Record<string, ReminderTranslation>;
   roles: Record<string, RoleTranslation>;
+  ui: Record<string, string>;
 };
 
 export type LanguageCode = 'en' | 'de' | 'fr' | 'es' | 'pt' | 'it' | 'pl' | 'ru' | 'zh' | 'ja';
@@ -29,7 +30,7 @@ export type LanguageCode = 'en' | 'de' | 'fr' | 'es' | 'pt' | 'it' | 'pl' | 'ru'
 export interface TranslationContextType {
   language: LanguageCode;
   setLanguage: (language: LanguageCode) => void;
-  t: (type: 'roles' | 'jinxes' | 'reminders' | 'editions', key: string, field?: string, fallbackLanguage?: LanguageCode) => string | undefined;
+  t: (type: 'roles' | 'jinxes' | 'reminders' | 'editions' | 'ui', key: string, field?: string, fallbackLanguage?: LanguageCode) => string | undefined;
   getJinxKey: (char1: string, char2: string) => string;
 }
 

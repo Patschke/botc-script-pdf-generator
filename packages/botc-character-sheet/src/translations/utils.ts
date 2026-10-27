@@ -21,7 +21,7 @@ export function getJinxKey(char1: string, char2: string): string {
  * @returns The translated string or undefined
  */
 export function getTranslation(
-  type: 'roles' | 'jinxes' | 'reminders' | 'editions',
+  type: 'roles' | 'jinxes' | 'reminders' | 'editions' | 'ui',
   key: string,
   field?: string,
   language: LanguageCode = 'en',
@@ -59,6 +59,9 @@ export function getTranslation(
         value = (value as any)[field];
       }
       break;
+    case 'ui':
+      value = translations.ui[key];
+      break;
   }
 
   // If we found a value, return it
@@ -89,6 +92,9 @@ export function getTranslation(
           if (fallbackValue && field) {
             fallbackValue = (fallbackValue as any)[field];
           }
+          break;
+        case 'ui':
+          fallbackValue = fallbackTranslations.ui[key];
           break;
       }
       if (fallbackValue !== undefined && fallbackValue !== null) {
