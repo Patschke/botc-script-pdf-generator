@@ -135,6 +135,7 @@ export function CharacterSheet({
                   ]}
                   inlineJinxIcons={inlineJinxIcons}
                   iconUrlTemplate={iconUrlTemplate}
+                  showEnglishNames={options.showEnglishNames}
                 />
                 {i < sections.length - 1 && (
                   <img src="/images/divider.png" className="section-divider" />

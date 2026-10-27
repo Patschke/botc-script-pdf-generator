@@ -5,6 +5,7 @@ import {
   getGenericIconUrl,
 } from "../utils/scriptUtils";
 import { useTranslation } from "../translations/context";
+import { getCharacterNameWithEnglish } from "../translations/utils";
 
 interface CharacterSectionProps {
   title: string;
@@ -14,6 +15,7 @@ interface CharacterSectionProps {
   allCharacters: ResolvedCharacter[];
   inlineJinxIcons: "none" | "primary" | "both";
   iconUrlTemplate?: string;
+  showEnglishNames?: boolean;
 }
 // Threshold to switch from evenly spaced to space-between layout
 const BALANCE_POINT = 8;
@@ -25,6 +27,7 @@ export function CharacterSection({
   allCharacters: allChars,
   inlineJinxIcons,
   iconUrlTemplate,
+  showEnglishNames,
 }: CharacterSectionProps) {
   const { t } = useTranslation();
   
@@ -57,6 +60,7 @@ export function CharacterSection({
                 allChars,
                 inlineJinxIcons,
               )}
+              showEnglishNames={showEnglishNames}
             />
           ))}
         </div>
@@ -73,6 +77,7 @@ export function CharacterSection({
                 allChars,
                 inlineJinxIcons,
               )}
+              showEnglishNames={showEnglishNames}
             />
           ))}
         </div>
@@ -85,19 +90,29 @@ interface CharacterCardProps {
   color: string;
   jinxedCharacters: ResolvedCharacter[];
   iconUrlTemplate?: string;
+  showEnglishNames?: boolean;
 }
 function CharacterCard({
   character,
   color,
   jinxedCharacters,
   iconUrlTemplate,
+  showEnglishNames,
 }: CharacterCardProps) {
   const { t } = useTranslation();
   
   // Get translated character name and ability
-  const translatedName = t('roles', character.id, 'name');
+  const translatedName = t('roles', character.id, 'name') || character.name;
+  const englishName = character.name;
   const translatedAbility = t('roles', character.id, 'ability');
   
+  // Use the utility function to get the character name with optional English name
+  const displayName = getCharacterNameWithEnglish(
+    translatedName,
+    englishName,
+    showEnglishNames || false,
+  );
+
   const renderAbility = (ability: string) => {
     // Match square brackets at the end of the ability
     const match = ability.match(/^(.*?)(\[.*?\])$/);
@@ -127,7 +142,7 @@ function CharacterCard({
       </div>
       <div className="character-info">
         <h3 className="character-name" style={{ color: color }}>
-          {translatedName || character.name}
+          {displayName}
           {jinxedCharacters.length > 0 && (
             <span className="inline-jinx-icons">
               {jinxedCharacters.map((jinxedChar) => {
@@ -161,7 +176,6 @@ function calculateMidpoint(characters: ResolvedCharacter[]): number {
 
   const largerFirstHalf = characters.slice(0, leftWeightedMidpoint);
   const largerSecondHalf = characters.slice(rightWeightedMidpoint - 1);
-
   const totalAbilityLengthFirstHalf = largerFirstHalf.reduce(
     (sum, char) => sum + char.ability.length,
     0,
@@ -176,3 +190,4 @@ function calculateMidpoint(characters: ResolvedCharacter[]): number {
     ? leftWeightedMidpoint
     : rightWeightedMidpoint;
 }
+

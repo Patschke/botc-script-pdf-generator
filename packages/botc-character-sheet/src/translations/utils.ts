@@ -237,3 +237,24 @@ export function isLanguageSupported(language: LanguageCode): boolean {
 export function getSupportedLanguages(): LanguageCode[] {
   return ['en', 'de'];
 }
+
+/**
+ * Get a character name with optional English name for multi-lingual playgroups
+ * @param translatedName - The translated character name
+ * @param englishName - The original English character name
+ * @param showEnglishNames - Whether to show English names alongside translations
+ * @returns The formatted name string
+ */
+export function getCharacterNameWithEnglish(
+  translatedName: string,
+  englishName: string,
+  showEnglishNames: boolean,
+): string {
+  // If English names should be shown and the names are different
+  if (showEnglishNames && translatedName !== englishName) {
+    return `${translatedName} (${englishName})`;
+  }
+  
+  // Otherwise, just return the translated name
+  return translatedName;
+}

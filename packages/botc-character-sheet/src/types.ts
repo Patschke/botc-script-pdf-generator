@@ -82,6 +82,8 @@ export interface ScriptOptions {
   teensy: boolean;
   // Language support
   language?: LanguageCode;
+  // Show English names alongside translated names for multi-lingual playgroups
+  showEnglishNames?: boolean;
 }
 
 export interface ParsedScript {
@@ -104,3 +106,4 @@ export type PageDimensions = {
   margin: number;
   bleed: number;
 };
+

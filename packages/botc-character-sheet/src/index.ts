@@ -65,5 +65,7 @@ export {
   getTranslatedJinxReason,
   isLanguageSupported,
   getSupportedLanguages,
+  getCharacterNameWithEnglish,
 } from "./translations/utils";
+
 
