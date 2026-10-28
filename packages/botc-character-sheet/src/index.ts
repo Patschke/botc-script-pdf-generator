@@ -22,6 +22,16 @@ export { darken, parseRgb, rgbString } from "./utils/colours";
 export { ROLES_BY_ID } from "./data/roles";
 export { JINXES } from "./data/jinxes";
 export { FIRST_NIGHT_ORDER, OTHER_NIGHT_ORDER } from "./data/nightsheet";
+export {
+  groupCharactersByTeam,
+  findJinxes,
+  resolveJinxCharacters,
+  resolveJinxCharactersWithTranslation,
+  resolveIconUrl,
+  getGenericIconUrl,
+  getImageUrl,
+  getJinxedCharacters,
+} from "./utils/scriptUtils";
 
 // Translation exports
 export {
@@ -52,20 +62,8 @@ export {
   getEnglishFallback,
 } from "./translations/loader";
 
-export {
-  getJinxKey,
-  getTranslation,
-  getRoleName,
-  getRoleAbility,
-  getJinxReason,
-  getReminderText,
-  getEditionName,
-  getEditionDescription,
-  getTranslatedJinxes,
-  getTranslatedJinxReason,
-  isLanguageSupported,
-  getSupportedLanguages,
-  getCharacterNameWithEnglish,
-} from "./translations/utils";
+export { getJinxKey, getTranslation, getRoleName, getRoleAbility, getJinxReason, getReminderText, getEditionName, getEditionDescription, getTranslatedJinxes, getTranslatedJinxReason, isLanguageSupported, getSupportedLanguages, getCharacterNameWithEnglish, } from "./translations/utils";
+export { getFabledOrLoric } from "./utils/fabledOrLoric";
+export { getTranslatedTravellers } from "./utils/travellers";
 
 

@@ -12,6 +12,7 @@ import { JinxesAndSpecial } from "../components/JinxesAndSpecial";
 import { CharacterSection } from "./CharacterSection";
 import { PrintablePage } from "../components/PrintablePage";
 import { useTranslation } from "../translations/context";
+import { getJinxKey, getTranslation } from "../translations/utils";
 
 interface CharacterSheetProps {
   title: string;
@@ -33,6 +34,25 @@ export function CharacterSheet({
   options,
 }: CharacterSheetProps) {
   const { t } = useTranslation();
+  const { language } = options;
+  
+  // Translate jinx reasons based on current language
+  const translatedJinxes = jinxes.map((jinx) => {
+    const jinxKey = getJinxKey(jinx.characters[0], jinx.characters[1]);
+    const translatedText = language && language !== 'en'
+      ? getTranslation('jinxes', jinxKey, undefined, language as any) || jinx.jinx
+      : jinx.jinx;
+    
+    return {
+      ...jinx,
+      jinx: translatedText,
+    };
+  });
+  
+  console.log('[CharacterSheet] Language:', language);
+  console.log('[CharacterSheet] Raw jinxes:', jinxes);
+  console.log('[CharacterSheet] Translated jinxes:', translatedJinxes);
+  
   const {
     color,
     logo,
@@ -126,7 +146,7 @@ export function CharacterSheet({
                   title={section.title.toUpperCase()}
                   characters={section.chars}
                   charNameColor={section.color}
-                  jinxes={jinxes}
+                  jinxes={translatedJinxes}
                   allCharacters={[
                     ...characters.townsfolk,
                     ...characters.outsider,
@@ -147,7 +167,7 @@ export function CharacterSheet({
                 <img src="/images/divider.png" className="section-divider" />
                 <JinxesAndSpecial
                   fabledAndLoric={fabledOrLoric}
-                  jinxes={jinxes}
+                  jinxes={translatedJinxes}
                   allCharacters={[
                     ...characters.townsfolk,
                     ...characters.outsider,

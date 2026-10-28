@@ -4,6 +4,7 @@ import { NightOrderEntry, ResolvedCharacter, ScriptOptions } from "../types";
 import { FabledOrLoric } from "../utils/fabledOrLoric";
 import { getImageSrc } from "../utils/nightOrder";
 import { useTranslation } from "../translations/context";
+import { getTranslatedTravellers } from "../utils/travellers";
 import "./InfoSheet.css";
 
 type InfoSheetProps = {
@@ -32,6 +33,30 @@ export const InfoSheet = ({
 }: InfoSheetProps) => {
   const { t } = useTranslation();
   const { displayNightOrder, displayPlayerCounts, iconUrlTemplate } = options;
+  const language = options.language || "en";
+  
+  // Helper function to get translated character name
+  const getTranslatedCharName = (char: ResolvedCharacter): string => {
+    if (language !== "en") {
+      const translatedName = t("roles", char.id, "name");
+      if (translatedName) {
+        return translatedName;
+      }
+    }
+    return char.name || "";
+  };
+  
+  // Translate travellers based on current language
+  const translatedTravellers = travellers
+    ? getTranslatedTravellers(travellers, iconUrlTemplate, language)
+    : [];
+  
+  // Debug logging for jinx translation in InfoSheet
+  console.log('[InfoSheet] Received jinxes:', jinxes);
+  console.log('[InfoSheet] Jinx text examples:');
+  jinxes.slice(0, 3).forEach((jinx, i) => {
+    console.log(`  Jinx ${i}:`, jinx.characters[0].id, '+', jinx.characters[1].id, '=', jinx.text);
+  });
   
   // Get translated text
   const firstNightText = t('ui', 'first_night') || 'First Night';
@@ -123,7 +148,7 @@ export const InfoSheet = ({
                     ></img>
                     <div className="info-jinx-text">
                       <p className="info-jinx-name">
-                        {jinx.characters[0].name} & {jinx.characters[1].name}
+                        {getTranslatedCharName(jinx.characters[0])} & {getTranslatedCharName(jinx.characters[1])}
                       </p>
                       <p className="info-jinx-note">{jinx.text}</p>
                     </div>
@@ -136,11 +161,11 @@ export const InfoSheet = ({
           {!!travellers?.length && (
             <>
               <h4 className="info-sheet-section-title">{travellersText}</h4>
-              <div class="info-sheet-section">
-                {travellers?.map((entry) => (
+              <div class="info-sheet-section">                
+                {translatedTravellers?.map((entry) => (
                   <div className="info-fabled-loric-entry">
                     <img
-                      src={getImageSrc(entry, iconUrlTemplate)}
+                      src={entry.image}
                       alt={entry.name}
                       class="icon"
                     ></img>

@@ -1,5 +1,6 @@
 import { ResolvedCharacter } from "../types";
 import { resolveIconUrl } from "./scriptUtils";
+import { getTranslation } from "../translations/utils";
 
 export type FabledOrLoric = {
   name: string;
@@ -11,6 +12,7 @@ export type FabledOrLoric = {
 export function getFabledOrLoric(
   characters: ResolvedCharacter[],
   iconUrlTemplate?: string,
+  language: string = "en",
 ): FabledOrLoric[] {
   const fabled = characters.filter((char) => char.team === "fabled");
   const loric = characters.filter((char) => char.team === "loric");
@@ -20,16 +22,36 @@ export function getFabledOrLoric(
     (iconUrlTemplate ? resolveIconUrl(iconUrlTemplate, char.id) : undefined) ??
     undefined;
 
+  const getTranslatedName = (char: ResolvedCharacter): string => {
+    if (language !== "en") {
+      const translatedName = getTranslation("roles", char.id, "name", language as any);
+      if (translatedName) {
+        return translatedName;
+      }
+    }
+    return char.name || "";
+  };
+
+  const getTranslatedNote = (char: ResolvedCharacter): string => {
+    if (language !== "en") {
+      const translatedAbility = getTranslation("roles", char.id, "ability", language as any);
+      if (translatedAbility) {
+        return translatedAbility;
+      }
+    }
+    return char.ability || "";
+  };
+
   const output = [
     ...loric.map((lo) => ({
-      name: lo.name,
-      note: lo.ability,
+      name: getTranslatedName(lo),
+      note: getTranslatedNote(lo),
       team: "loric" as const,
       image: getImage(lo),
     })),
     ...fabled.map((fb) => ({
-      name: fb.name,
-      note: fb.ability,
+      name: getTranslatedName(fb),
+      note: getTranslatedNote(fb),
       team: "fabled" as const,
       image: getImage(fb),
     })),
