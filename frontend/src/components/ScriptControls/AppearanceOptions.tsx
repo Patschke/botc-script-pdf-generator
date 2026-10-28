@@ -105,11 +105,6 @@ export function AppearanceOptions({
         checked={options.teensy}
         onChange={(value) => onOptionChange("teensy", value)}
       />
-      <Toggle
-        label="Show English Names (for multi-lingual playgroups)"
-        checked={options.showEnglishNames || false}
-        onChange={(value) => onOptionChange("showEnglishNames", value)}
-      />
     </>
   );
 }
