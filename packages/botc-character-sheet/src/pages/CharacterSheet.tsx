@@ -176,6 +176,7 @@ export function CharacterSheet({
                   ]}
                   bootleggerRules={bootleggerRules}
                   iconUrlTemplate={iconUrlTemplate}
+                  showEnglishNames={options.showEnglishNames}
                 />
               </>
             )}

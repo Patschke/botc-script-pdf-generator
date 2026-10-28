@@ -4,6 +4,7 @@ import { getTranslation } from "../translations/utils";
 
 export type FabledOrLoric = {
   name: string;
+  englishName: string;
   note: string;
   team: "fabled" | "loric";
   image?: string;
@@ -42,15 +43,19 @@ export function getFabledOrLoric(
     return char.ability || "";
   };
 
+  const getEnglishName = (char: ResolvedCharacter): string => char.name || "";
+
   const output = [
     ...loric.map((lo) => ({
       name: getTranslatedName(lo),
+      englishName: getEnglishName(lo),
       note: getTranslatedNote(lo),
       team: "loric" as const,
       image: getImage(lo),
     })),
     ...fabled.map((fb) => ({
       name: getTranslatedName(fb),
+      englishName: getEnglishName(fb),
       note: getTranslatedNote(fb),
       team: "fabled" as const,
       image: getImage(fb),
@@ -59,3 +64,4 @@ export function getFabledOrLoric(
 
   return output;
 }
+
