@@ -121,7 +121,6 @@ export function renderCharacterSheet(
 ): string {
   const assetBase = getAssetBase(requestOrigin);
   const language: LanguageCode = (options.language as LanguageCode) || "en";
-  console.log("Backend render - language:", language);
 
   let docHTML;
   if (options.teensy) {

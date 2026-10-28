@@ -34,9 +34,9 @@ export const InfoSheet = ({
   const { displayNightOrder, displayPlayerCounts, iconUrlTemplate } = options;
   
   // Get translated text
-  const firstNightText = t('ui', 'firstNight') || 'First Night';
-  const otherNightsText = t('ui', 'otherNights') || 'Other Nights';
-  const fabledLoricText = t('ui', 'fabledLoric') || 'Fabled & Loric';
+  const firstNightText = t('ui', 'first_night') || 'First Night';
+  const otherNightsText = t('ui', 'other_nights') || 'Other Nights';
+  const fabledLoricText = t('ui', 'fabled_and_loric') || 'Fabled & Loric';
   const jinxesText = t('ui', 'jinxes') || 'Jinxes';
   const travellersText = t('ui', 'recommendedTravellers') || 'Recommended Travellers';
   const baseCountsText = t('ui', 'baseCounts') || 'Base Character Counts';
