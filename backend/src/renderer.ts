@@ -121,11 +121,6 @@ export function renderCharacterSheet(
 ): string {
   const assetBase = getAssetBase(requestOrigin);
   const language: LanguageCode = (options.language as LanguageCode) || "en";
-  
-  // Debug logging for jinx translation in backend
-  console.log('[Backend Renderer] Language:', language);
-  console.log('[Backend Renderer] Script characters:', script.characters.map(c => c.id));
-  console.log('[Backend Renderer] Options:', { ...options, language });
 
   let docHTML;
   if (options.teensy) {

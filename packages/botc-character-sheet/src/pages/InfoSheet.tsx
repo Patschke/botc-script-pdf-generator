@@ -51,13 +51,6 @@ export const InfoSheet = ({
     ? getTranslatedTravellers(travellers, iconUrlTemplate, language)
     : [];
   
-  // Debug logging for jinx translation in InfoSheet
-  console.log('[InfoSheet] Received jinxes:', jinxes);
-  console.log('[InfoSheet] Jinx text examples:');
-  jinxes.slice(0, 3).forEach((jinx, i) => {
-    console.log(`  Jinx ${i}:`, jinx.characters[0].id, '+', jinx.characters[1].id, '=', jinx.text);
-  });
-  
   // Get translated text
   const firstNightText = t('ui', 'first_night') || 'First Night';
   const otherNightsText = t('ui', 'other_nights') || 'Other Nights';

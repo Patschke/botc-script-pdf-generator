@@ -49,10 +49,6 @@ export function CharacterSheet({
     };
   });
   
-  console.log('[CharacterSheet] Language:', language);
-  console.log('[CharacterSheet] Raw jinxes:', jinxes);
-  console.log('[CharacterSheet] Translated jinxes:', translatedJinxes);
-  
   const {
     color,
     logo,

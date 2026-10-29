@@ -207,7 +207,6 @@ export function resolveJinxCharactersWithTranslation(
       const translatedText = language !== 'en' 
         ? (() => {
             const translated = getTranslation('jinxes', jinxKey, undefined, language as any);
-            console.log('[Jinx Translation]', char1id, '+', char2id, '=', jinxKey, '| Language:', language, '| Translated:', translated || 'NOT FOUND', '| Original:', jinx);
             return translated || jinx;
           })()
         : jinx;
